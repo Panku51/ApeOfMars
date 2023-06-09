@@ -81,10 +81,15 @@ function createRandomApe() {
   const powerRange = powerRanges[rarity];
 
   const powerValue = getRandomNumber(powerRange.min, powerRange.max);
+  const powerValues = {};
+  for (const powe of power) {
+    const powerValue = getRandomNumber(powerRange.min, powerRange.max);
+    powerValues[powe] = powerValue;
+  }
 
   const mineRate = mineRates[rarity];
   const ape = {
-    power,
+    power:powerValues,
     origin,
     rarity,
     powerLevel,
