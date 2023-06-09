@@ -47,7 +47,8 @@ function createRandomApe() {
   const rarity = getRandomElement(rarities);
 
   const powerLevel = powerLevels[rarity];
-//   const powerLevel = getRandomElement(powerNum);
+
+
 
 
   const powerRange = powerRanges[rarity];
