@@ -152,7 +152,7 @@ function createRandomApe() {
   return ape;
 }
 
-const numRandomApes = 10; 
+const numRandomApes = 2; 
 for (let i = 0; i < numRandomApes; i++) {
     const ape = createRandomApe();
     console.log(ape)
