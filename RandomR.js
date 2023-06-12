@@ -10,6 +10,43 @@ const demonspic=['https://apeofmars.s3.ap-south-1.amazonaws.com/simpsons.jpg','h
 
 const rarities = ['common', 'rare', 'epic', 'legendary', 'super-legend'];
 
+
+// database
+
+import { getDatabase, ref, set } from "firebase/database";
+
+function writeApeData(origin,rarity,powerLevel,powerValue,power,mineRate,coolDifferenceTime,url) {
+  const db = getDatabase();
+  // const data={
+  //   Origin: origin,
+  //   Rarity: rarity,
+  //   PowerLevel:powerLevel,
+  //   powerValue: powerValue,
+  //   Power: power,
+  //   MinRate:mineRate,
+  //   CoolTime:coolDifferenceTime,
+  //   ImageUrl:url
+  // }
+  push().set(ref(db, 'Origin/' +origin), {
+    // Origin: origin,
+    Rarity: rarity,
+    PowerLevel:powerLevel,
+    powerValue: powerValue,
+    Power: power,
+    MinRate:mineRate,
+    CoolTime:coolDifferenceTime,
+    ImageUrl:url
+  });
+
+  // var db=getDatabase()
+  // db.push()
+}
+
+
+
+
+//
+
 const powerLevels = {
     common: 2,
     rare: 3,
@@ -122,8 +159,8 @@ function createRandomApe() {
   return ape;
 }
 
-const numRandomApes = 100; 
+const numRandomApes = 10; 
 for (let i = 0; i < numRandomApes; i++) {
     const ape = createRandomApe();
-    console.log(ape);
+    writeApeData(ape.origin,ape.rarity,ape.powerLevel,ape.powerValue,ape.power,ape.mineRate,ape.coolDifferenceTime,ape.url);
 }
