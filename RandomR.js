@@ -3,7 +3,7 @@ import random from "random";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase } from "firebase/database";
-import {ref, set } from "firebase/database";
+import {ref, set,push } from "firebase/database";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -156,9 +156,18 @@ const numRandomApes = 10;
 for (let i = 0; i < numRandomApes; i++) {
     const ape = createRandomApe();
     console.log(ape)
-    set(ref(database, 'users/' + ape.rarity), {
-      username:ape.origin
+    push(ref(database, 'users/'), {
+      Origin:ape.origin,
+      Rarity:ape.rarity,
+      powerLevels:ape.powerLevel,
+      powerValue:ape.powerValue,
+      power:ape.power,
+      minrate:ape.mineRate,
+      coolDifferenceTime:ape.coolDifferenceTime,
+      imageurl:ape.url
     });
+
+    // set(database,ape.origin)
   }
     // writeApeData(ape.origin,ape.rarity,ape.powerLevel,ape.powerValue,ape.power,ape.mineRate,ape.coolDifferenceTime,ape.url);
 // }
