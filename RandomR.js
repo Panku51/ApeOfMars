@@ -4,6 +4,10 @@ const powers = ['fire', 'ice', 'water', 'earth', 'plant', 'poison'];
 
 const origins = ['phoebs', 'demons'];
 
+const phemospic=['https://apeofmars.s3.ap-south-1.amazonaws.com/152514.jpg','https://apeofmars.s3.ap-south-1.amazonaws.com/152508.jpg','https://apeofmars.s3.ap-south-1.amazonaws.com/itachi-uchiha-theme-or15.jpg']
+
+const demonspic=['https://apeofmars.s3.ap-south-1.amazonaws.com/simpsons.jpg','https://apeofmars.s3.ap-south-1.amazonaws.com/unnamed-2.jpg','https://apeofmars.s3.ap-south-1.amazonaws.com/itachi-uchiha-theme-or15.jpg']
+
 const rarities = ['common', 'rare', 'epic', 'legendary', 'super-legend'];
 
 const powerLevels = {
@@ -14,6 +18,7 @@ const powerLevels = {
     'super-legend': 6
 };
 
+
 const powerRanges = {
   common: { min: 10, max: 30 },
   rare: { min: 30, max: 60 },
@@ -21,6 +26,7 @@ const powerRanges = {
   legendary: { min: 70, max: 85 },
   'super-legend': { min: 85, max: 99 }
 };
+
 
 const mineRates = {
     common: 120,
@@ -55,6 +61,16 @@ const randomizeElemnts = (powers, powerLevel) => {
     return result;
 };
 
+const getImage=(origin)=>{
+  if(origin === 'demons')
+  {
+    return getRandomElement(demonspic)
+  }
+  else
+  {
+    return getRandomElement(phemospic)
+  }
+}
 
 
 
@@ -70,6 +86,10 @@ function getRandomElement(array) {
 function createRandomApe() {
 //   const power = getRandomElement(powers);
   const origin = getRandomElement(origins);
+
+  const url=getImage(origin)
+
+
 
   const rarity = getRandomElement(rarities);
 
@@ -91,6 +111,7 @@ function createRandomApe() {
   const ape = {
     power:powerValues,
     origin,
+    url,
     rarity,
     powerLevel,
     powerValue,
@@ -101,7 +122,7 @@ function createRandomApe() {
   return ape;
 }
 
-const numRandomApes = 5; 
+const numRandomApes = 100; 
 for (let i = 0; i < numRandomApes; i++) {
     const ape = createRandomApe();
     console.log(ape);
