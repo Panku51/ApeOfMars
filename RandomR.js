@@ -1,5 +1,34 @@
 import random from "random";
 
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { getDatabase } from "firebase/database";
+import {ref, set } from "firebase/database";
+
+
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyBs7zsMewLWsxXxMESHgxzib5MtgY_9ao4",
+  authDomain: "apeofmars-30bd3.firebaseapp.com",
+  projectId: "apeofmars-30bd3",
+  databaseURL: "https://apeofmars-30bd3-default-rtdb.firebaseio.com/",
+  storageBucket: "apeofmars-30bd3.appspot.com",
+  messagingSenderId: "28414968159",
+  appId: "1:28414968159:web:735e70b99ad76c381a76ea",
+  measurementId: "G-0WC1V1954L"
+};
+
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+
+const database = getDatabase(app);
+
+
 const powers = ['fire', 'ice', 'water', 'earth', 'plant', 'poison'];
 
 const origins = ['phoebs', 'demons'];
@@ -10,42 +39,6 @@ const demonspic=['https://apeofmars.s3.ap-south-1.amazonaws.com/simpsons.jpg','h
 
 const rarities = ['common', 'rare', 'epic', 'legendary', 'super-legend'];
 
-
-// database
-
-import { getDatabase, ref, set } from "firebase/database";
-
-function writeApeData(origin,rarity,powerLevel,powerValue,power,mineRate,coolDifferenceTime,url) {
-  const db = getDatabase();
-  // const data={
-  //   Origin: origin,
-  //   Rarity: rarity,
-  //   PowerLevel:powerLevel,
-  //   powerValue: powerValue,
-  //   Power: power,
-  //   MinRate:mineRate,
-  //   CoolTime:coolDifferenceTime,
-  //   ImageUrl:url
-  // }
-  push().set(ref(db, 'Origin/' +origin), {
-    // Origin: origin,
-    Rarity: rarity,
-    PowerLevel:powerLevel,
-    powerValue: powerValue,
-    Power: power,
-    MinRate:mineRate,
-    CoolTime:coolDifferenceTime,
-    ImageUrl:url
-  });
-
-  // var db=getDatabase()
-  // db.push()
-}
-
-
-
-
-//
 
 const powerLevels = {
     common: 2,
@@ -162,5 +155,10 @@ function createRandomApe() {
 const numRandomApes = 10; 
 for (let i = 0; i < numRandomApes; i++) {
     const ape = createRandomApe();
-    writeApeData(ape.origin,ape.rarity,ape.powerLevel,ape.powerValue,ape.power,ape.mineRate,ape.coolDifferenceTime,ape.url);
-}
+    console.log(ape)
+    set(ref(database, 'users/' + ape.rarity), {
+      username:ape.origin
+    });
+  }
+    // writeApeData(ape.origin,ape.rarity,ape.powerLevel,ape.powerValue,ape.power,ape.mineRate,ape.coolDifferenceTime,ape.url);
+// }
