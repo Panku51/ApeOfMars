@@ -3,7 +3,7 @@ import random from "random";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getDatabase } from "firebase/database";
-import {ref, set,push } from "firebase/database";
+import {ref, set,push ,onValue} from "firebase/database";
 
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -155,7 +155,7 @@ function createRandomApe() {
 const numRandomApes = 2; 
 for (let i = 0; i < numRandomApes; i++) {
     const ape = createRandomApe();
-    console.log(ape)
+    // console.log(ape)
     push(ref(database, 'users/'), {
       Origin:ape.origin,
       Rarity:ape.rarity,
@@ -171,3 +171,11 @@ for (let i = 0; i < numRandomApes; i++) {
   }
     // writeApeData(ape.origin,ape.rarity,ape.powerLevel,ape.powerValue,ape.power,ape.mineRate,ape.coolDifferenceTime,ape.url);
 // }
+// import { getDatabase, ref, onValue} from "firebase/database";
+
+const starCountRef = ref(database, 'users/');
+onValue(starCountRef, (snapshot) => {
+  const data = snapshot.val();
+  // updateStarCount(postElement, data);
+  console.log(data)
+});
